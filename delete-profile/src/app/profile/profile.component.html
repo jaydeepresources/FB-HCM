@@ -1,0 +1,61 @@
+<div class="container">
+    <p class="display-4 py-3">My Profile</p>
+    <hr />
+
+    <form #profileForm="ngForm" (ngSubmit)="profileSubmit(profileForm)" novalidate>
+        <div class="mb-3">
+            <label for="employeeEmail" class="form-label">Employee Id</label>
+            <input type="text" class="form-control" id="employeeId" name="employeeId" #employeeId="ngModel"
+                [(ngModel)]="employeeProfile.employeeId" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="employeeName" class="form-label">Employee Name</label>
+            <input type="text" class="form-control" id="employeeName" name="employeeName" #employeeName="ngModel"
+                [(ngModel)]="employeeProfile.employeeName" required>
+            <div id="emailHelp" class="form-text text-danger" *ngIf="employeeName.dirty && employeeName.invalid">
+                Employee Name field can't be empty.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="employeeEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="employeeEmail" aria-describedby="emailHelp"
+                name="employeeEmail" #employeeEmail="ngModel" [(ngModel)]="employeeProfile.employeeEmail" required>
+            <div id="emailHelp" class="form-text text-danger" *ngIf="employeeEmail.dirty && employeeEmail.invalid">
+                Email Address field can't be empty.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="employeePassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="employeePassword" name="employeePassword"
+                #employeePassword="ngModel" [(ngModel)]="employeeProfile.employeePassword" required>
+            <div id="emailHelp" class="form-text text-danger"
+                *ngIf="employeePassword.dirty && employeePassword.invalid">
+                Password field can't be empty.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="employeeSalary" class="form-label">Employee Salary</label>
+            <input type="text" class="form-control" id="employeeSalary" name="employeeSalary" #employeeSalary="ngModel"
+                [(ngModel)]="employeeProfile.employeeSalary" required>
+            <div id="emailHelp" class="form-text text-danger" *ngIf="employeeSalary.dirty && employeeSalary.invalid">
+                Employee Salary field can't be empty.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary me-2"
+            [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
+        <button type="button" (click)="deleteProfile()" class="btn btn-danger">Delete Profile</button>
+    </form>
+
+    <div class="alert alert-success mt-2" role="alert" *ngIf="successFlag">
+        Profile Saved.
+    </div>
+
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorFlag">
+        Profile couldn't be saved.
+    </div>
+
+    <div class="alert alert-info mt-2" role="alert" *ngIf="deleteFlag">
+        Profile deleted.
+    </div>
+
+</div>

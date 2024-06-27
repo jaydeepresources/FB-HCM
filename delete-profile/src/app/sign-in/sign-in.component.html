@@ -1,0 +1,33 @@
+<div class="container">
+    <p class="display-4 py-3">
+        Sign In
+    </p>
+    <hr>
+
+    <form #signInForm="ngForm" (ngSubmit)="signInSubmit(signInForm)" novalidate>
+        <div class="mb-3">
+            <label for="employeeEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="employeeEmail" aria-describedby="emailHelp"
+                name="employeeEmail" #employeeEmail="ngModel" [(ngModel)]="employee.employeeEmail" required>
+            <div id="emailHelp" class="form-text text-danger" *ngIf="employeeEmail.dirty && employeeEmail.invalid">
+                Email Address field can't be empty.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="employeePassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="employeePassword" name="employeePassword"
+                #employeePassword="ngModel" [(ngModel)]="employee.employeePassword" required>
+            <div id="emailHelp" class="form-text text-danger"
+                *ngIf="employeePassword.dirty && employeePassword.invalid">
+                Password field can't be empty.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"
+            [disabled]="signInForm.pristine || signInForm.invalid">Submit</button>
+    </form>
+
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="invalidLoginFlag">
+        Authentication Failure because of Invalid Credentials !
+    </div>
+
+</div>
